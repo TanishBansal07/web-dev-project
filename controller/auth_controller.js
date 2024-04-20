@@ -1,5 +1,9 @@
 let database = require("../database");
-
+let passport = require("passport")
+let LocalStrategy = require("passport-local").Strategy;
+let userModel = require("../database").userModel;
+let session = require("express-session");
+let passport = require("../middleware/passport");
 let authController = {
   login: (req, res) => {
     res.render("auth/login");
@@ -10,11 +14,35 @@ let authController = {
   },
 
   loginSubmit: (req, res) => {
-    // implement later
+
+    let user = userModel.findOne(req.body.email);
+    if (user) {
+      if (user.password === req.body.password) {
+        req.session.user = user;
+        res.redirect("/reminders");
+      } else {
+        res.render("auth/login", {
+          error: "Your login details are not valid. Please try again",
+        });
+      }
+    } else {
+      res.render("auth/login", {
+        error: "Your login details are not valid. Please try again",
+      });
+    }
+
   },
 
   registerSubmit: (req, res) => {
-    // implement later
+    let user = {
+      id: database.database.length + 1,
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      reminders: [],
+    };
+    database.database.push(user);
+    res.redirect("/login");
   },
 };
 
