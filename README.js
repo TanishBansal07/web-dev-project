@@ -28,7 +28,17 @@
 // # Ashutosh
 // Configured passport.js file:
 // I first reviewed the code to look at the structure of the code and how the naming conventions were used.
-
+// added a local strategy to the passport.js file.
+// I then created a function to serialize the user.
+// I then created a function to deserialize the user.
+// I then created a function to check if the user is authenticated.
+// I then created a function to check if the user is authorized.
+// used usermodel to check if the user exists in the database.'
+// usercontroller was then used to check if the user exists in the database.
+// I then tested the passport.js file by running the server and checking if the passport.js file was working.
+// Did not work as expected.
+// usermodel works but the passport.js file was not working as expected.
+//  Still working on the passport.js file to see if the issue can be resolved.
 
 
 
