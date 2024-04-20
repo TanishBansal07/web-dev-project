@@ -3,7 +3,7 @@ let passport = require("passport")
 let LocalStrategy = require("passport-local").Strategy;
 let userModel = require("../database").userModel;
 let session = require("express-session");
-let passport = require("../middleware/passport");
+
 let authController = {
   login: (req, res) => {
     res.render("auth/login");

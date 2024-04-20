@@ -3,16 +3,17 @@ const app = express();
 const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
 const session = require("express-session");
-
+const LocalStrategy = require("passport-local").Strategy;
 const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
+const passport = require("passport");
 
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.urlencoded({ extended: false }));
 
 app.use(ejsLayouts);
-
+app.use(passport.initialize());
 app.set("view engine", "ejs");
 app.use(
   session({
@@ -22,7 +23,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 1000 * 60 * 60 * 24 * 7,
     },
   })
 );

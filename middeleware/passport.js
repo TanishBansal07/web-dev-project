@@ -15,7 +15,11 @@ const localLogin = new LocalStrategy(
         });
   }
 );
-
+// - [ ]  Authenticated users should not be able to see other authenticated users reminders. Only their own.
+// - [ ]  Authenticated users should not be able to change other authenticated users reminders. Only their own.
+// - [ ]  Authenticated users should not be able to delete other authenticated users reminders.
+// - [ ]  You must include the ability for users to Login using Email & Password
+// - [ ]  You must include the ability for ADMINS to remotely destroy a session.
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
@@ -28,11 +32,12 @@ passport.deserializeUser(function (id, done) {
     done({ message: "User not found" }, null);
   }
 });
-function isAuthenticated(req, res, next) {
+function isauthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
   res.redirect("/login");
 }
-module.exports = passport.use(localLogin);
+
+module.exports = { passport, localLogin, isauthenticated };
 
