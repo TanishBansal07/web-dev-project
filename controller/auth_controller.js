@@ -1,5 +1,5 @@
 let database = require("../database");
-let passport = require("passport")
+let passport = require("../middeleware/passport").passport;
 let LocalStrategy = require("passport-local").Strategy;
 let userModel = require("../database").userModel;
 let session = require("express-session");
@@ -13,25 +13,12 @@ let authController = {
     res.render("auth/register");
   },
 
-  loginSubmit: (req, res) => {
+  loginSubmit: passport.authenticate('local', {
+    successRedirect: '/reminders',
+    failureRedirect: '/login',
+    failureFlash: true
+  }),
 
-    let user = userModel.findOne(req.body.email);
-    if (user) {
-      if (user.password === req.body.password) {
-        req.session.user = user;
-        res.redirect("/reminders");
-      } else {
-        res.render("auth/login", {
-          error: "Your login details are not valid. Please try again",
-        });
-      }
-    } else {
-      res.render("auth/login", {
-        error: "Your login details are not valid. Please try again",
-      });
-    }
-
-  },
 
   registerSubmit: (req, res) => {
     let user = {

@@ -26,6 +26,8 @@
 // it worked as expected and the update function was working as expected.
 
 // # Ashutosh
+// Configured passport.js file:
+// I first reviewed the code to look at the structure of the code and how the naming conventions were used.
 
 
 

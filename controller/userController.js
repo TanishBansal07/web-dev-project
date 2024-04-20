@@ -1,6 +1,6 @@
 const userModel = require("../database").userModel;
 const database = require("../database");
-const passport = require("../middleware/passport");
+const passport = require("../middeleware/passport").passport;
 const getUserByEmailIdAndPassword = (email, password) => {
   let user = userModel.findOne(email);
   if (user) {

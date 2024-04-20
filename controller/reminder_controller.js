@@ -1,8 +1,9 @@
 let database = require("../database");
-
 let remindersController = {
   list: (req, res) => {
-    res.render("reminder/index", { reminders: database.cindy.reminders });
+     // verify if the user is logined
+    
+    res.render("reminder/index", { reminders:   database.cindy.reminders});
   },
 
   new: (req, res) => {
@@ -62,7 +63,7 @@ let remindersController = {
   },
 
   delete: (req, res) => {
-    // implementation here 👈
+    use
     remindertodelete = req.params.id;
     database.cindy.reminders = database.cindy.reminders.filter(function (reminder) {
       return reminder.id != remindertodelete;
